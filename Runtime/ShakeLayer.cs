@@ -32,7 +32,8 @@ namespace Wobble.Shake
 
             return new Offset(
                 new Vector3(Noise(phase, 0), Noise(phase, 1), 0f) * (profile.MaxTranslation * amplitude),
-                Noise(phase, 2) * profile.MaxRotation * amplitude);
+                Noise(phase, 2) * profile.MaxRotation * amplitude,
+                amplitude);
         }
 
         // Perlin noise is cheap, smooth, and periodic enough for hand-tuned frequencies.
@@ -43,11 +44,13 @@ namespace Wobble.Shake
         {
             public readonly Vector3 Translation;
             public readonly float RotationDegrees;
+            public readonly float Amplitude;
 
-            public Offset(Vector3 translation, float rotationDegrees)
+            public Offset(Vector3 translation, float rotationDegrees, float amplitude)
             {
                 Translation = translation;
                 RotationDegrees = rotationDegrees;
+                Amplitude = amplitude;
             }
         }
     }

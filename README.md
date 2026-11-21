@@ -59,6 +59,16 @@ public sealed class Landing : MonoBehaviour
 distance- or speed-based intensity. `StopAll()` clears the stack;
 `RecaptureRest()` re-bases the neutral pose after teleports.
 
+### Mixing and falloff
+
+The component's `mode` picks how simultaneous layers combine: `Additive` (default)
+stacks impacts, `Strongest` lets the loudest layer win so directions stay readable,
+and `WeightedAverage` softens crowds of near-equal shakes into one push.
+
+For spatial sources use `AddAt(profile, worldPosition)` with a `FalloffVolume` on
+the explosion or hazard. Strength is full inside `innerRadius` and fades to silence
+at `radius`; nothing happens outside every volume.
+
 ## Controls (demo scene)
 
 - `Space` — play the selected profile at full strength
@@ -69,9 +79,11 @@ distance- or speed-based intensity. `StopAll()` clears the stack;
 
 ```
 Runtime/
-  CameraShake.cs     layer stack, LateUpdate summation, neutral pose
+  CameraShake.cs     layer stack, mixing, LateUpdate summation, neutral pose
   ShakeLayer.cs      per-instance clock, envelope sampling, noise
   ShakeProfile.cs    ScriptableObject: curves, budgets, weight
+  Blending/          additive, strongest and weighted-average mixers
+  Falloff/           distance attenuation volume for world-space sources
   Wobble.Shake.asmdef
 ```
 
