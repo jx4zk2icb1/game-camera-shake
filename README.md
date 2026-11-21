@@ -69,11 +69,16 @@ For spatial sources use `AddAt(profile, worldPosition)` with a `FalloffVolume` o
 the explosion or hazard. Strength is full inside `innerRadius` and fades to silence
 at `radius`; nothing happens outside every volume.
 
-## Controls (demo scene)
+## Sample scene
 
-- `Space` — play the selected profile at full strength
-- `1` / `2` / `3` — switch between light, medium and heavy profiles
-- `Esc` — `StopAll()`
+There is no scene asset in the repo; build one in a minute:
+
+1. Camera with `CameraShake` and `Demo/LandingDemo` attached.
+2. Three profiles assigned to the demo array (light, medium, heavy).
+3. Enter play mode.
+
+`Demo/LandingDemo.cs` maps `Space` to a full-strength `Add`, `1`/`2`/`3` to the
+profile choice, and `Esc` to `StopAll()`.
 
 ## Layout
 
@@ -85,13 +90,15 @@ Runtime/
   Blending/          additive, strongest and weighted-average mixers
   Falloff/           distance attenuation volume for world-space sources
   Wobble.Shake.asmdef
+Demo/
+  LandingDemo.cs     keyboard driver for the sample scene
 ```
 
 ## Build steps
 
 1. Open the project in Unity 2022.3 LTS or newer.
-2. Import the demo scene, enter play mode, press `Space`.
-3. For a player build: `File > Build Settings`, add the demo scene, target
+2. Set up the sample scene as above, enter play mode, press `Space`.
+3. For a player build: `File > Build Settings`, add your sample scene, target
    desktop, build.
 
 ## Notes
